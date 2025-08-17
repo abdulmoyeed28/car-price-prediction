@@ -52,7 +52,7 @@ Ensure you have Python installed. You can download it from the official Python w
 Clone this repository to your local machine using the following command:
 
 ```bash
-git clone https://github.com/your-username/car-price-prediction.git
+git clone https://github.com/abdulmoyeed28/car-price-prediction.git
 cd car-price-prediction
 ```
 
@@ -66,10 +66,10 @@ pip install pandas numpy scikit-learn flask
 
 #### **Step 3: Run the Model Training Script**
 
-The `carprediction.py` script will clean the data, train the model, and save the trained model as `Model.pkl`.
+The `car_price_prediction.py` script will clean the data, train the model, and save the trained model as `Model.pkl`.
 
 ```bash
-python carprediction.py
+python car_price_prediction.py
 ```
 
 This will also generate a `cleaned_car.csv` file, which is used by the web application.
@@ -88,7 +88,7 @@ The application will run on `http://127.0.0.1:5000`. Open this URL in your web b
 
 ### **Detailed Code Walkthrough**
 
-#### **1. `carprediction.py`**
+#### **1. `car_price_prediction.py`**
 
 This script handles the entire machine learning pipeline.
 
@@ -132,10 +132,4 @@ A sample prediction can be made using the trained model with a new set of inputs
 **Output:**
 The model would output an estimated price, for example, `[450000.0]`.
 
-\!
-
 -----
-
-### **Contribute**
-
-Contributions are welcome\! If you have any suggestions or improvements, please feel free to open a pull request or an issue on the GitHub repository.
