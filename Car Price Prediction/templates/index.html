@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Car Price Prediction</title>
+    <!-- Bootstrap CSS for responsive design -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* General body styles */
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: #1a1a1a; /* Dark background */
+            display: flex; /* Center the container */
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            margin: 0;
+        }
+
+        /* Container styling */
+        .container {
+            background-color: white; /* White background for the form */
+            padding: 30px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            max-width: 500px; /* Maximum width of the container */
+            width: 100%; /* Full width */
+        }
+
+        /* Header styling */
+        h1 {
+            color: #28a745; /* Green color */
+            font-weight: 700;
+        }
+
+        /* Label styling */
+        .form-group label {
+            font-weight: 600; /* Bold labels */
+        }
+
+        /* Button styles */
+        .btn-success {
+            background-color: #28a745; /* Green background */
+            border: none; /* Remove border */
+        }
+
+        /* Button hover effect */
+        .btn-success:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        /* Spinner styles */
+        .spinner-border {
+            display: none; /* Hidden by default */
+            width: 3rem; /* Spinner width */
+            height: 3rem; /* Spinner height */
+        }
+
+        /* Prediction result styling */
+        .prediction-result {
+            font-size: 1.5rem; /* Larger font size */
+            color: #333; /* Dark color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Car Price Prediction</h1>
+        <form action="/predict" method="post" id="prediction-form">
+
+            <!-- Manufacturer selection -->
+            <div class="form-group">
+                <label for="company">Manufacturer:</label>
+                <select class="form-control" id="company" name="company" required>
+                    {% for company in companies %}
+                    <option value="{{ company }}">{{ company }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Car model selection -->
+            <div class="form-group">
+                <label for="name">Car Model:</label>
+                <select class="form-control" id="name" name="name" required>
+                    {% for model in car_models %}
+                    <option value="{{ model }}">{{ model }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Manufacturing year input -->
+            <div class="form-group">
+                <label for="year">Manufacturing Year:</label>
+                <input type="number" class="form-control" id="year" name="year" placeholder="Enter Manufacturing Year" min="2000" max="2022" required>
+            </div>
+
+            <!-- Kilometers driven input -->
+            <div class="form-group">
+                <label for="kms_driven">Kilometers Driven:</label>
+                <input type="number" class="form-control" id="kms_driven" name="kms_driven" placeholder="Enter Kilometers Driven" min="0" required>
+            </div>
+
+            <!-- Fuel type selection -->
+            <div class="form-group">
+                <label for="fuel_type">Fuel Type:</label>
+                <select class="form-control" id="fuel_type" name="fuel_type" required>
+                    <option value="" disabled selected>Select Fuel Type</option>
+                    <option value="Petrol">Petrol</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="LPG">LPG</option>
+                </select>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-success btn-block" id="submit-btn">Predict</button>
+            <div class="text-center mt-3">
+                <!-- Loading spinner -->
+                <div class="spinner-border text-success" role="status" id="loading-spinner">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Disable the submit button and show spinner when form is submitted
+        document.getElementById('prediction-form').addEventListener('submit', function() {
+            document.getElementById('submit-btn').disabled = true; // Disable button
+            document.getElementById('loading-spinner').style.display = 'inline-block'; // Show loading spinner
+        });
+    </script>
+</body>
+</html>
